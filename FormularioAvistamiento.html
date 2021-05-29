@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro de especies</title>
+    <link href="static/styles/style.css" rel="stylesheet">
+    <link href="static/styles/styleForm.css" rel="stylesheet">
+
+</head>
+<body>
+    <header class="header">
+        <div class="container menu-principal">
+            <span class="menu-icon">Menú</span>
+            <nav class="navigation">
+
+               <ul>
+                   <li><a href="FormularioAvistamiento.html">Informar avistamiento</a> </li>
+                    <li><a href="cgi-bin/listado_avistamientos.py?pag=1">Ver listado de avistamientos</a> </li>
+                    <li><a href="Estadísticas.html">Estadísticas</a> </li>
+               </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <main class="main-forms">
+        <div class="container">
+            <H1>Ingrese los datos para el registro</H1>
+        </div>
+
+        <form class="formularioAvistamientos" id="formularioAvistamientos" name="formularioAvistamientos" method="post" action="cgi-bin/index.py?guardado=Exito!" enctype="multipart/form-data">
+            <div id="ingreso-datos" >
+                    <div class="secciones-forms">Datos de contacto:</div>
+
+                    <div class="entrada">
+                        <label for="nombre">Nombre (*): </label>
+                        <input type="text" id="nombre" name="nombre" maxlength="200" placeholder="ingrese su nombre"  size="100">
+                    </div>
+
+                    <div class="entrada">
+                        <label for="email">Email (*): </label>
+                        <input type="text" id="email" name="email"  placeholder="ejemplo@dcc.uchile.cl" size="100">
+                    </div>
+
+                    <div class="entrada">
+                        <label for="celular">Numero de celular: </label>
+                        <input type="text" id="celular" name="celular" maxlength="15" placeholder="+569 11111111" size="15">
+                    </div>
+
+                    <div class="secciones-forms">Lugar: </div>
+                    <div class="entrada">
+                        <label for="region"> Región (*): </label>
+                            <select id="region" name="region" onchange="llenarListaComunas(this.id)">
+                                <option value="0" selected>Seleccione una región</option>
+                                <option value="15">Región de Arica y Parinacota</option>
+                                <option value="1">Región de Tarapacá</option>
+                                <option value="2">Región de Antofagasta</option>
+                                <option value="3">Región de Atacama</option>
+                                <option value="4">Región de Coquimbo</option>
+                                <option value="5">Región de Valparaíso</option>
+                                <option value="13">Región Metropolitana de Santiago</option>
+                                <option value="6">Región del Libertador General Bernardo O'Higgins</option>
+                                <option value="7">Región del Maule</option>
+                                <option value="16">Región del Ñuble</option>
+                                <option value="8">Región del Biobío</option>
+                                <option value="10">Región de La Araucanía</option>
+                                <option value="14">Región de Los Ríos</option>
+                                <option value="10">Región de Los Lagos</option>
+                                <option value="11">Región de Aysén del General Carlos Ibáñez del Campo</option>
+                                <option value="12">Región de Magallanes y la Antártica Chilena</option>
+
+                            </select>
+                    </div>
+
+                    <div class="entrada">
+                        <label for="comuna">Comuna (*): </label>
+                            <select id="comuna" name="comuna">
+                                <option value="0"> Seleccione una comuna </option>
+                            </select>
+                    </div>
+
+                    <div class="entrada">
+                        <label for="sector">Sector:</label>
+                        <input type="text" id="sector" name="sector" maxlength="200" placeholder="ingrese el sector" size="200">
+                    </div>
+
+
+                <div id="info-avistamiento-1" >
+                    <div class="Avistamiento">INFORMACIÓN AVISTAMIENTO 1</div>
+
+                    <div class="entrada">
+                        <label for="dia-hora-avistamiento-1">Día y hora del avistamiento (*): </label>
+                        <input type="text" id="dia-hora-avistamiento-1" name="dia-hora-avistamiento-1" size="20" >
+                    </div>
+                    <div class="entrada">
+                        <label for="tipo-avistamiento-1">Tipo (*): </label>
+                        <select id="tipo-avistamiento-1" name="tipo-avistamiento-1">
+                            <option value="0">Seleccione una especie</option>
+                            <option value="no sé">No sé</option>
+                            <option value="insecto">Insecto</option>
+                            <option value="arácnido">Arácnido</option>
+                            <option value="miriápodo">Miriápodo</option>
+                        </select>
+                    </div>
+                    <div class="entrada">
+                        <label for="estado-avistamiento-1">Estado (*): </label>
+                        <select id="estado-avistamiento-1" name="estado-avistamiento-1">
+                            <option value="0">Seleccione un estado</option>
+                            <option value="no sé">No sé</option>
+                            <option value="vivo">Vivo</option>
+                            <option value="muerto">Muerto</option>
+                        </select></div>
+                    <div class="entrada" id="fotosIngresadas-1">
+                        <label for="foto-avistamiento-1-1" >Foto (*): </label>
+                        <input type="file" id="foto-avistamiento-1-1" name="foto-avistamiento-1" accept="image/jpeg, image/png, image/jprg">
+                        <button type="button" onclick="nuevaFoto(1)">agregar otra foto</button><br>
+                    </div>
+                </div>
+            </div>
+            <div class="entrada botones">
+
+                <button type="button" onclick="nuevoAvistamiento()">Informar otro avistamiento</button><br>
+                <button id="enviarformulario" type="button" onclick="validador()" value="enviar">Enviar información de avistamiento</button>
+
+            </div>
+
+
+
+        </form>
+    </main>
+
+    <div class="volver_inicio">
+        <ul><li><a class="volver_inicio" href="cgi-bin/index.py">Volver al inicio</a></li></ul>
+    </div>
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <h3>Contacto: + 569 XXXXXXXX</h3>
+        </div>
+
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="static/scripts/scripts.js"></script>
+    <script src="static/scripts/scriptFormulario.js"></script>
+
+
+</body>
+</html>

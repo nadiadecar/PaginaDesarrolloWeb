@@ -1,0 +1,81 @@
+/*- - - - - - - - - - - - - SWEET ALERT BOTONES - - - - - - - - - - - - -  */
+.swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  background-color: #38eabf;
+  font-size: 12px;
+  border: 1px solid #6c92fd;
+  color: white;
+  width: 80%;
+  margin-left: 4%;
+  margin-right: 10%;
+}
+
+.swal-text {
+  padding: 10px;
+  display: block;
+  width:80%;
+  margin-left: 11%;
+  text-align: center;
+  color: #61534e;
+}
+
+.swal {
+    width: auto;
+}
+.swal-icon {
+    width: 800px;
+    height: 600px;
+}
+
+/*- - - - - - - - - - - - - ENVIARFORULARIO - - - - - - - - - - - - -  */
+
+#enviarformulario{
+    background: darkgreen;
+    padding: 2px;
+    outline: 0;
+    font-size: 13px;
+    color: white;
+
+}
+
+/*- - - - - - - - - - - - - LABEL - - - - - - - - - - - - -  */
+label{
+    font-size: 17px;
+}
+
+/* - - - - - - - - - - - - - SECCIONES-FORMS - - - - - - - - - - - - -  */
+.secciones-forms{
+    text-align: left;
+    font-weight: bold;
+    padding: 10px 0;
+    font-size: 25px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+/*- - - - - - - - - - - - - MAIN-FORMS - - - - - - - - - - - - -  */
+.main-forms{
+    width: 70%;
+    background-color:  #10AA86 ;
+    border-radius: 10px;
+    padding: 30px;
+    margin-left: 15%;
+    margin-right: 15%;
+    box-shadow: #adadad30 0 0 9px 2px;
+    font-weight: 300;
+}
+
+/*- - - - - - - - - - - - - INPUT - - - - - - - - - - - - -  */
+
+input{
+    display: inline-block;
+    max-width:15rem;
+}
+.Avistamiento{
+    margin-top: 20px;
+    font-size: 27px;
+    font-weight: bold;
+    text-decoration: underline overline;
+    margin-bottom: 20px;
+}
