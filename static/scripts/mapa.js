@@ -6,7 +6,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: 'sk.eyJ1IjoibmFkaWFkZWNhciIsImEiOiJja3Bua3QxZW0wMDNlMm5wa2xtd29qZG1wIn0.i9RVctpvJXWN14FAVdCl0w'
+    accessToken: 'sk.{extra}.i9RVctpvJXWN14FAVdCl0w'
 }).addTo(mymap);
 
 function obtenerDatos(){
