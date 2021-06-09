@@ -57,7 +57,7 @@ class Avistamientos:
                 total = self.cursor.fetchall()[0][0] + 1
                 hash_archivo = str(total) + hashlib.sha256(file_name.encode()).hexdigest()[0:30]
 
-                file_path = "../static/media/" + hash_archivo
+                file_path = "../../media/" + hash_archivo
                 open(file_path,'wb').write(fileobj[i].file.read())
 
                 self.cursor.execute(sql_archivo, (str(file_path), file_name, id_detalle))
@@ -72,7 +72,7 @@ class Avistamientos:
             total = self.cursor.fetchall()[0][0] + 1
             hash_archivo = str(total) + hashlib.sha256(file_name.encode()).hexdigest()[0:30]
 
-            file_path = '../static/media/' + hash_archivo
+            file_path = '../../media/' + hash_archivo
             open(file_path, 'wb').write(fileobj.file.read())
 
             self.cursor.execute(sql_archivo, (str(file_path), file_name, id_detalle))
@@ -98,7 +98,7 @@ class Avistamientos:
                 total = self.cursor.fetchall()[0][0] + 1
                 hash_archivo = str(total) + hashlib.sha256(file_name.encode()).hexdigest()[0:30]
 
-                file_path = "../static/media/" + hash_archivo
+                file_path = "../../media/" + hash_archivo
                 open(file_path,'wb').write(fileobj[i].file.read())
 
                 tipo = filetype.guess(file_path)
@@ -122,7 +122,7 @@ class Avistamientos:
             total = self.cursor.fetchall()[0][0] + 1
             hash_archivo = str(total) + hashlib.sha256(file_name.encode()).hexdigest()[0:30]
 
-            file_path = "../static/media/" + hash_archivo
+            file_path = "../../media/" + hash_archivo
             open(file_path, 'wb').write(fileobj.file.read())
 
             tipo = filetype.guess(file_path)
@@ -171,3 +171,44 @@ class Avistamientos:
         sql = f"SELECT * FROM avistamiento WHERE id={id_avistameito}"
         self.cursor.execute(sql)
         return self.cursor.fetchall()
+
+    def get_avistamientos_por_fecha(self):
+        sql = "SELECT DATE(dia_hora),COUNT(id) FROM detalle_avistamiento GROUP BY DATE(dia_hora) ORDER BY DATE(dia_hora)"
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
+    def get_avistamientos_por_especie(self):
+        sql = "SELECT tipo,COUNT(id) FROM detalle_avistamiento GROUP BY tipo"
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
+    def get_detalle_avistamiento_estado(self):
+        sql = "SELECT estado,MONTH(dia_hora) as mes FROM detalle_avistamiento"
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
+    def get_comunas_avistamientos(self):
+        sql = "SELECT DISTINCT comuna_id FROM avistamiento"
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
+
+    def get_detalle_por_comuna(self,comuna):
+        sql = f"SELECT * FROM avistamiento WHERE comuna_id={comuna}"
+        self.cursor.execute(sql)
+        ids = self.cursor.fetchall()
+        detalles = []
+        for i in ids:
+            id = i[0]
+            detalles += self.get_detalle_avistamiento(id)
+        return detalles
+
+
+    def get_fotos_por_comuna(self,comuna):
+        detalles = self.get_detalle_por_comuna(comuna)
+
+        cant_fotos = 0
+        for j in detalles:
+            id = j[0]
+            cant_fotos += len(self.get_foto(id))
+
+        return cant_fotos

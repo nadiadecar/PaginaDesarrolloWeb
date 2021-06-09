@@ -6,18 +6,17 @@ import cgitb
 from avistamientos_db import Avistamientos
 from base_general import pagina
 
-
 cgitb.enable()
 
 print("Content-type: text/html\r\n\r\n")
 
-pag = int(cgi.FieldStorage()['pag'].value) #Se extrae el número de la página actual
+pag = int(cgi.FieldStorage()['pag'].value)  # Se extrae el número de la página actual
 
-dbd = Avistamientos("localhost","cc500256_u","Ssemperris","cc500256_db")
+dbd = Avistamientos("localhost", "root", "", "cc500256_db")
 
 
 ####################################################################FUNCIÓN AUXILIAR#############################################################################
-#Esta funón va a generar las filas de la tabla
+# Esta funón va a generar las filas de la tabla
 def generadorTabla(m, n, data_avistamiento):
     main = ""
     for i in range(m, n):
@@ -42,18 +41,16 @@ def generadorTabla(m, n, data_avistamiento):
 
     return main
 
+
 avist = dbd.contar_avistamientos()
-
-
 
 style = """
         <link href='../static/styles/styleAvistamientos.css' rel='stylesheet'>
         """
 
-
 js = """<script src="../static/scripts/scriptListado.js"></script>"""
 
-main="""
+main = """
     <main class="main">
         <div class="container">
             <br>
@@ -106,22 +103,22 @@ else:
             """
 
     if avist < 5:
-        main += generadorTabla(0,len(data_avistamiento), data_avistamiento)
+        main += generadorTabla(0, len(data_avistamiento), data_avistamiento)
 
         main += """
                     </table>
                     </div>
                 </main>
                 """
-        for i in range(avist,5):
+        for i in range(avist, 5):
             main += """
                     <br>
                     <br>
                     <br
             """
     else:
-        if avist>5*pag:
-            main += generadorTabla(5 * (pag-1), 5 * (pag), data_avistamiento)
+        if avist > 5 * pag:
+            main += generadorTabla(5 * (pag - 1), 5 * (pag), data_avistamiento)
             main += """
                         </table>
                     </div>
@@ -130,50 +127,47 @@ else:
         else:
             main += generadorTabla(5 * (pag - 1), len(data_avistamiento), data_avistamiento)
 
-
             main += """
                         </table>
                     </div>
                 </main>"""
 
-            for i in range(len(data_avistamiento)%5,5):
+            for i in range(len(data_avistamiento) % 5, 5):
                 main += """
                     <br>
                     <br>
                     """
 
-        main +=    """
+        main += """
             <div class="paginas">
                 <ul>"""
 
-        #Se calculan la cantidad de páginas necesarias para todos los datos
-        cant_paginas = avist//5
-        if avist%5>0:
-            cant_paginas +=1
+        # Se calculan la cantidad de páginas necesarias para todos los datos
+        cant_paginas = avist // 5
+        if avist % 5 > 0:
+            cant_paginas += 1
 
-        if cant_paginas>1:
-            if pag>2:
+        if cant_paginas > 1:
+            if pag > 2:
                 main += f"<li><a href='listado_avistamientos.py?pag=1'><<</a></li>"
 
-            if cant_paginas >= pag+1: #Existe al menos una página después de la actual
-                if pag-1>0: #Si pag>1 -> existe pag-1
-                    main += f"<li><a href='listado_avistamientos.py?pag={pag-1}'><</a></li>"
+            if cant_paginas >= pag + 1:  # Existe al menos una página después de la actual
+                if pag - 1 > 0:  # Si pag>1 -> existe pag-1
+                    main += f"<li><a href='listado_avistamientos.py?pag={pag - 1}'><</a></li>"
                 main += f"<li><a href='listado_avistamientos.py?pag={pag}'>{pag}</a></li>"
-                main += f"<li><a href='listado_avistamientos.py?pag={pag+1}'>></a></li>"
-                if cant_paginas > pag+1:
+                main += f"<li><a href='listado_avistamientos.py?pag={pag + 1}'>></a></li>"
+                if cant_paginas > pag + 1:
                     main += f"<li><a href='listado_avistamientos.py?pag={cant_paginas}'><</a></li>"
 
-            else: #estamos en la última página
+            else:  # estamos en la última página
                 if pag - 1 > 0:  # Si pag>1 -> existe pag-1
                     main += f"<li><a href='listado_avistamientos.py?pag={pag - 1}'><</a></li>"
                 main += f"<li><a href='listado_avistamientos.py?pag={pag}'>{pag}</a></li>"
 
-
-            main += """
-                </ul>
-            </div>
-            """
-
+        main += """
+            </ul>
+        </div>
+        """
 
 main += """
 <div class="volver_inicio">
@@ -181,5 +175,4 @@ main += """
 </div>
 """
 
-
-pagina(main,style,js)
+pagina(main, style, js)

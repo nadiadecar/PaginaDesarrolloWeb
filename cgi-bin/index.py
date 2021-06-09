@@ -4,19 +4,18 @@
 import cgi
 import cgitb
 from base_general import pagina
+
 cgitb.enable()
 from avistamientos_db import Avistamientos
-
 
 print("Content-type: text/html\r\n\r\n")
 utf8stdout = open(1, 'w', encoding='utf-8', closefd=False)
 
-dbd = Avistamientos("localhost","cc500256_u","Ssemperris","cc500256_db")
-
+dbd = Avistamientos("localhost", "root", "", "cc500256_db")
 
 exito = cgi.FieldStorage()
 
-if len(exito.keys())>0:
+if len(exito.keys()) > 0:
     extra = """
             <div class="modal is-visible" id="modal1">
                 <div class="modal-dialog">
@@ -28,11 +27,12 @@ if len(exito.keys())>0:
                 </div>
             </div>
             """
-else: extra = ""
+else:
+    extra = ""
 
 
 #######################################################FUNCION AUXLIAR####################################################################
-#esta función va a generar las filas de la tabla
+# esta función va a generar las filas de la tabla
 def generadorTabla(n, data_avistamiento):
     main = ""
     for i in range(0, n):
@@ -55,8 +55,8 @@ def generadorTabla(n, data_avistamiento):
 
     return main
 
-############################################################IMPORTANTE####################################################################
 
+############################################################IMPORTANTE####################################################################
 
 
 avist = dbd.contar_avistamientos()
@@ -65,7 +65,7 @@ main = """<main class="main">
                     <H1>Bienvenido al registro de avistamiento para insectos, arácnidos y mariápodos.</H1>
                 </div>"""
 
-if avist==0:
+if avist == 0:
     main += """
                 <div class="container">
                     <br>
@@ -107,16 +107,15 @@ else:
         """
 
     if avist > 4:
-        main += generadorTabla(5,data_avistamiento)
+        main += generadorTabla(5, data_avistamiento)
     else:
-        main += generadorTabla(len(data_avistamiento),data_avistamiento)
-
+        main += generadorTabla(len(data_avistamiento), data_avistamiento)
 
 main += """
                 </table>
                 </div>
                 """
-if avist<5:
+if avist < 5:
     main += """
             <br>
             <br>
@@ -130,13 +129,21 @@ main += """
             </main>
         """
 
+########################################### MAPA #######################################################3
+
+main += """ <div id='mapid' style="height:500px; width:95%; margin-left:2.4%; margin-top:20px; position: static;"></div> 
+        <br>
+        <br>
+        <br>"""
 
 style = """
         <link href="../static/styles/modal.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
         """
 
 js = """
         <script src="../static/scripts/modal.js"></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+        <script src="../static/scripts/mapa.js"></script>
     """
-
-pagina(main,style,js)
+pagina(main, style, js)

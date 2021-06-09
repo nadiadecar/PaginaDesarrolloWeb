@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registro de especies</title>
+
     <link href="static/styles/style.css" rel="stylesheet">
+    <link href="static/styles/graficos.css" rel="stylesheet">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="static/scripts/scripts.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="static/scripts/graficos.js"></script>
 
 </head>
 <body>
@@ -29,9 +41,21 @@
 
     <div class="container">
         <ul>
-            <li><img src="static/img/Esta1.png" alt="Gráfico que muestra la cantidad de avistamientos por día"></li>
-            <li><img src="static/img/Esta2.png" alt="Gráfico que muestra el numero de avistamientos registrados según especie"></li>
-            <li><img src="static/img/Esta3.png" alt="Gráfico que muestra el estado de los seres vivos registrados en los distintos meses"></li>
+            <li><figure class="highcharts-figure">
+                <div id="container-1"></div>
+                <p class="highcharts-description">
+                </p>
+            </figure></li>
+            <li><figure class="highcharts-figure">
+                <div id="container-2"></div>
+                <p class="highcharts-description">
+                </p>
+            </figure></li>
+            <li><figure class="highcharts-figure">
+                <div id="container-3"></div>
+                <p class="highcharts-description">
+                </p>
+            </figure></li>
         </ul>
     </div>
 
@@ -48,8 +72,6 @@
 
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="static/scripts/scripts.js"></script>
 
 
 </body>

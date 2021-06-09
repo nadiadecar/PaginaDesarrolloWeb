@@ -32,6 +32,7 @@ table{
     width:100%;
     border-collapse: collapse;
     border: darkslategray 1px solid;
+    padding-bottom: 20px;
 }
     caption{
         font-size: 30px;
@@ -85,8 +86,8 @@ table{
 }
 /* - - - - - - - - - - - - - MAIN - - - - - - - - - - - - -  */
 .main{
-    width: 80%;
-    margin-left: 10%;
+    width: 95%;
+    margin-left: 2.4%;
     padding-top: 30px;
 }
 /* - - - - - - - - - - - - - MENU-ICON - - - - - - - - - - - - -  */
@@ -174,4 +175,7 @@ ul{
     margin-top: 10px;
 }
 
-
+/*- - - - - - - - - - - - - MAPA - - - - - -  - - - - - - - */
+#mapid {
+    height: 300px;
+}

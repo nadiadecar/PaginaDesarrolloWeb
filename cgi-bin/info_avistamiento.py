@@ -5,7 +5,6 @@ import cgi
 import cgitb
 from avistamientos_db import Avistamientos
 
-
 cgitb.enable()
 
 print("Content-type: text/html\r\n\r\n")
@@ -14,16 +13,12 @@ utf8stdout = open(1, 'w', encoding='utf-8', closefd=False)
 numero = cgi.FieldStorage()
 id_avistamiento = numero['av'].value
 
-
-dbd = Avistamientos("localhost","cc500256_u","Ssemperris","cc500256_db")
-
+dbd = Avistamientos("localhost", "root", "", "cc500256_db")
 
 data = dbd.get_avistamiento_id(id_avistamiento)[0]
 data_detalle = dbd.get_detalle_avistamiento(data[0])
 comuna = dbd.get_comuna(data[1])[0]
 region = dbd.get_region(comuna[2])[0]
-
-
 
 header = """
 <!DOCTYPE html>
@@ -74,7 +69,6 @@ for d in data_detalle:
                 </div>
         """
 
-
 main += """
         <div class="botones">
             <button class="botones-info" onclick="location.href='listado_avistamientos.py?pag=1'">Volver a lista de avistamientos</button><br>
@@ -101,6 +95,6 @@ footer = """
 </html>
 """
 
-print(header,file=utf8stdout)
-print(main,file=utf8stdout)
-print(footer,file=utf8stdout)
+print(header, file=utf8stdout)
+print(main, file=utf8stdout)
+print(footer, file=utf8stdout)
